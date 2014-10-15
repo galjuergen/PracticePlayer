@@ -1,0 +1,18 @@
+<resources>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_croptime">Crop time</string>
+    <string name="pref_croptime_summ">Time which a song is played at most.</string>
+
+    <string name="pref_pausetime">Pause</string>
+    <string name="pref_pausetime_summ">Time between songs.</string>
+
+    <string name="pref_fadeouttime">Fade out</string>
+    <string name="pref_fadeouttime_summ">Time used to fade out a song.</string>
+
+</resources>

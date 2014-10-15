@@ -1,0 +1,24 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="pref_croptime"
+        android:title="@string/pref_croptime"
+        android:summary="@string/pref_croptime_summ"
+        android:defaultValue="90"
+        android:persistent="true" />
+
+    <EditTextPreference
+        android:key="pref_pausetime"
+        android:title="@string/pref_pausetime"
+        android:summary="@string/pref_pausetime_summ"
+        android:defaultValue="30"
+        android:persistent="true" />
+
+    <EditTextPreference
+        android:key="pref_fadeouttime"
+        android:title="@string/pref_fadeouttime"
+        android:summary="@string/pref_fadeouttime_summ"
+        android:defaultValue="5"
+        android:persistent="true" />
+
+</PreferenceScreen>
