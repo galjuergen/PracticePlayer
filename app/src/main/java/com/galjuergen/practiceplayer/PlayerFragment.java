@@ -27,7 +27,6 @@ public class PlayerFragment extends Fragment
 
     protected PlayList mPlayList = new PlayList();
     protected Timer mFadeTimer;
-    protected Timer mPauseTimer = new Timer();
 
     private final static int INT_VOLUME_MAX = 100;
     private final static int INT_VOLUME_MIN = 0;
@@ -95,8 +94,6 @@ public class PlayerFragment extends Fragment
         super.onDetach();
         mActivity = null;
     }
-
-
 
     public void preparePlayer()
     {
@@ -202,7 +199,7 @@ public class PlayerFragment extends Fragment
 
     public void playPause()
     {
-        if (false == mPaused) {
+        if (!mPaused) {
             if (mPlayer.isPlaying()) mPlayer.pause();
             else mPlayer.start();
         }
@@ -301,7 +298,6 @@ public class PlayerFragment extends Fragment
                 SystemClock.sleep(100);
                 long    totalDuration = mPrefCropTime * 1000;
                 long    currentDuration;
-                int     progress;
                 boolean nextSong = false;
 
                 if(mPlayer.isPlaying())
