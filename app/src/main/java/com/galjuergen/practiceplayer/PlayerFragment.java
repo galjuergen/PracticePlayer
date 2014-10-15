@@ -19,11 +19,10 @@ import java.util.TimerTask;
  */
 public class PlayerFragment extends Fragment
 {
-    protected boolean mPaused = false;
-
     protected MediaPlayer mPlayer = new MediaPlayer();
 
     protected String currentSong;
+    protected boolean mPaused = false;
 
     protected PlayList mPlayList = new PlayList();
     protected Timer mFadeTimer;
@@ -197,12 +196,28 @@ public class PlayerFragment extends Fragment
         }
     }
 
-    public void playPause()
+    public boolean playPause()
     {
-        if (!mPaused) {
-            if (mPlayer.isPlaying()) mPlayer.pause();
-            else mPlayer.start();
+        if(mPlayList.getSongCnt() == 0)
+        {
+            return false;
         }
+
+        if (!mPaused)
+        {
+            if (mPlayer.isPlaying())
+            {
+                mPlayer.pause();
+                return false;
+            }
+            else
+            {
+                mPlayer.start();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void pause()
@@ -302,7 +317,6 @@ public class PlayerFragment extends Fragment
 
                 if(mPlayer.isPlaying())
                 {
-                    //totalDuration   = mPlayer.getDuration();
                     currentDuration = mPlayer.getCurrentPosition();
 
                     if (currentDuration >= totalDuration) // TODO!!
@@ -314,14 +328,14 @@ public class PlayerFragment extends Fragment
                         SystemClock.sleep(mPrefPauseTime * 1000);
                         nextSong = true;
                     }
+                    publishProgress((long) (nextSong ? 1 : 0), totalDuration, currentDuration);
                 }
-                else
+                /*else
                 {
                     //totalDuration   = 100;
                     currentDuration = 0;
-                }
+                }*/
 
-                publishProgress((long)(nextSong ? 1 : 0), totalDuration, currentDuration);
             }
             return null;
         }

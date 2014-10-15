@@ -15,4 +15,6 @@
     <string name="pref_fadeouttime">Fade out</string>
     <string name="pref_fadeouttime_summ">Time used to fade out a song.</string>
 
+    <string name="pref_last_dir">/</string>
+
 </resources>

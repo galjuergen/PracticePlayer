@@ -10,7 +10,7 @@ import java.util.LinkedList;
  * Created by juergen on 12/10/14.
  */
 public class PlayList {
-    protected LinkedList<String> mSongList;
+    protected LinkedList<String> mSongList = new LinkedList<String>();
     protected int mSongIdx = -1;
 
     public PlayList() { }
@@ -31,12 +31,17 @@ public class PlayList {
         reset();
     }
 
+    public int getSongCnt()
+    {
+        return mSongList.size();
+    }
+
     public void readFromFile(String filePath)
     {
         try
         {
-            mSongList = new LinkedList<String>();
             mSongIdx  = -1;
+            mSongList.clear();
 
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             String line;

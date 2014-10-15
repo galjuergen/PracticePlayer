@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -89,7 +90,16 @@ public class PlayerActivity extends Activity implements PlayerFragment.TaskCallb
 
         mPlayPauseBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mPlayerFragment.playPause();
+                boolean isPlaying = mPlayerFragment.playPause();
+
+                if(isPlaying)
+                {
+                    mPlayPauseBtn.setText(R.string.pause);
+                }
+                else
+                {
+                    mPlayPauseBtn.setText(R.string.play);
+                }
             }
         });
 
@@ -161,7 +171,7 @@ public class PlayerActivity extends Activity implements PlayerFragment.TaskCallb
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            //mPlayerFragment.pause();
+            mPlayerFragment.pause();
 
             Intent intent = new Intent();
             intent.setClass(PlayerActivity.this, SettingsActivity.class);
@@ -196,9 +206,21 @@ public class PlayerActivity extends Activity implements PlayerFragment.TaskCallb
                     public void onChosenDir(String filename)
                     {
                         // The code in this function will be executed when the dialog OK button is pushed
-                        System.out.println(filename);
+
+                        // load playlist
                         mPlayerFragment.loadPlaylist(filename);
 
+                        // reset play/pause button
+                        mPlayPauseBtn.setText(R.string.play);
+
+                        // store latest directory
+                        File f = new File(filename);
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(PlayerActivity.this);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("pref_last_dir", f.getParent());
+                        editor.commit();
+
+                        // inform user by a toast
                         Context context = getApplicationContext();
                         int duration = Toast.LENGTH_SHORT;
                         Toast toast = Toast.makeText(context, R.string.playlist_loaded, duration);
@@ -207,16 +229,13 @@ public class PlayerActivity extends Activity implements PlayerFragment.TaskCallb
                 }
         );
         //You can change the default filename using the public variable "Default_File_Name"
-        fileOpenDialog.default_file_name = "/sdcard/";
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(PlayerActivity.this);
+        fileOpenDialog.default_file_name = prefs.getString("pref_last_dir", "/");
         fileOpenDialog.chooseFile_or_Dir(fileOpenDialog.default_file_name);
     }
 
-    private void showUserSettings() {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, R.string.playlist_loaded, duration);
-        toast.show();
-
+    private void showUserSettings()
+    {
         Intent intent = new Intent();
         intent.setClass(this, SettingsFragment.class);
         startActivityForResult(intent, 0);
