@@ -99,10 +99,11 @@
         android:divider="?android:attr/dividerHorizontal"
         android:showDividers="beginning"
         android:paddingTop="16dip"
-        android:layout_gravity="center_horizontal|bottom">
+        android:layout_gravity="center_horizontal|bottom"
+        style="@android:style/Holo.ButtonBar">
 
         <LinearLayout
-            style="?android:attr/buttonBarStyle"
+            style="@android:style/Holo.ButtonBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -123,7 +124,7 @@
                 android:text="@string/prev"
                 android:id="@+id/prev_btn"
                 android:maxLines="2"
-                style="?android:attr/buttonBarButtonStyle" />
+                style="@android:style/Holo.ButtonBar" />
 
             <Button
                 android:id="@+id/play_pause_btn"
@@ -132,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight=".6"
                 android:maxLines="2"
-                style="?android:attr/buttonBarButtonStyle" />
+                style="@android:style/Holo.ButtonBar" />
 
             <Button
                 android:layout_width="0dp"
@@ -141,7 +142,7 @@
                 android:text="@string/next"
                 android:id="@+id/next_btn"
                 android:maxLines="2"
-                style="?android:attr/buttonBarButtonStyle" />
+                style="@android:style/Holo.ButtonBar" />
 
             <LinearLayout android:id="@+id/rightSpacer1"
                 android:layout_width="0dip"
@@ -153,19 +154,37 @@
         </LinearLayout>
 
         <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:id="@+id/shuffle_ibtn"
+                android:src="@drawable/ic_action_shuffle"
+                style="@android:style/Holo.ButtonBar"
+                />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:id="@+id/repeat_ibtn"
+                android:src="@drawable/ic_action_repeat"
+                style="@android:style/Holo.ButtonBar"
+                />
+        </LinearLayout>
+
+        <!--LinearLayout
             style="?android:attr/buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:measureWithLargestChild="true">
 
-
-            <LinearLayout android:id="@+id/leftSpacer2"
-                android:layout_weight="0.25"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone" />
 
             <Button
                 android:layout_width="0dp"
@@ -174,16 +193,9 @@
                 android:text="@string/load_playlist"
                 android:id="@+id/load_playlist_btn"
                 android:maxLines="2"
-                style="?android:attr/buttonBarButtonStyle" />
+                style="@android:style/Holo.ButtonBar" />
 
-            <LinearLayout android:id="@+id/rightSpacer2"
-                android:layout_width="0dip"
-                android:layout_weight="0.25"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="gone" />
-
-        </LinearLayout>
+        </LinearLayout-->
     </LinearLayout>
 
 </FrameLayout>
